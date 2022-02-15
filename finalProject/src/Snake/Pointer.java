@@ -18,6 +18,7 @@ public class Pointer extends Thread{
     int speed = 10;
     static final Random r = new Random();
         public void run(){
+            int count=0;
             System.out.println(foods);//***************
             while(true){
                 try {
@@ -35,13 +36,16 @@ public class Pointer extends Thread{
                 if(last.distance(p) > 1){
                     n = calcCoor(last, p);
                     snake.add(n);
+                    count += count;
                     if(snake.size() >= size){
                         for(int i = 0; i < snake.size() - size; i++){
                             snake.remove(i);
                         }
                     }
-                    System.out.println(n+"prueba");
+                   // System.out.println(n+"prueba");
+                    
                 }
+                System.out.println("tamaño"+count);
                 Iterator<Point> i = foods.iterator();
                 while(i.hasNext()){
                     Point food = i.next();

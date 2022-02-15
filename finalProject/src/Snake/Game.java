@@ -29,4 +29,9 @@ public class Game {
         //Punto s = ;
         point.start();
     }
+    
+    public void finishGame(){
+        if(point.snake.size()>10)
+        board.setVisible(false);
+    }
 }
