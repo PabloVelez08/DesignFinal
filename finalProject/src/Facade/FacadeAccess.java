@@ -102,11 +102,11 @@ public class FacadeAccess extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAsteroidActionPerformed
 
     private void jBSnailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnailActionPerformed
-        this.snailGame.setVisible(true);
+        //this.snailGame.setVisible(true);
     }//GEN-LAST:event_jBSnailActionPerformed
 
     private void jBSnakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSnakeActionPerformed
-        this.snakeGame.setVisible(true);
+        //this.snakeGame.setVisible(true);
     }//GEN-LAST:event_jBSnakeActionPerformed
 
     /**
