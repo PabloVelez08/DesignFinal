@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Snake;
+package slither;
 
-import Snake.Frame;
+import slither.Board;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
@@ -13,44 +9,40 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-/**
- *
- * @author marcelinne
- */
-public class Punto extends Thread {
-    
-    int velocidad = 10 ; 
-    Frame frame;
-    Serpiente serpiente;
-    Comida comidas;
+public class Pointer extends Thread{
+    Board frame;
+    ArrayList<Point> snake;
+    ArrayList<Point> foods;
     PointerInfo a = MouseInfo.getPointerInfo();
-    
     int size = 10;
     int speed = 10;
-    
-    Random r;
+    static final Random r = new Random();
         public void run(){
-            comidas.agregarComida();
-            while(true){            
-                if(comidas.getSize() < 500){
-                    comidas.agregarComida();
+            System.out.println(foods);//***************
+            while(true){
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(foods.size() < 500){
+                    foods.add(new Point(r.nextInt(900), r.nextInt(900))); //Randómico de coordenadas
                 }
                 a = MouseInfo.getPointerInfo();
                 Point p = a.getLocation();
-                Point last = serpiente.getPosicion();
+                Point last = snake.get(snake.size() - 1);
                 Point n = new Point();
                 if(last.distance(p) > 1){
                     n = calcCoor(last, p);
-                    serpiente.agregar(n);
-                    if(serpiente.getSize() >= size){
-                        for(int i = 0; i < serpiente.getSize() - size; i++){
-                            serpiente.eliminar(i);
+                    snake.add(n);
+                    if(snake.size() >= size){
+                        for(int i = 0; i < snake.size() - size; i++){
+                            snake.remove(i);
                         }
                     }
                     System.out.println(n+"prueba");
                 }
-                
-                Iterator<Point> i = comidas.comidas.iterator();
+                Iterator<Point> i = foods.iterator();
                 while(i.hasNext()){
                     Point food = i.next();
                     if(food.distance(n) < 20){
@@ -60,10 +52,9 @@ public class Punto extends Thread {
                 }
                 frame.repaint();
             }
-             
-        }       
-    
-      public Point calcCoor(Point last, Point mouse){
+
+        }
+        public Point calcCoor(Point last, Point mouse){
             double degree = 0;
             if(last.x < mouse.x && last.y < mouse.y){
                 degree = 360 - Math.toDegrees(Math.atan((double) (mouse.y - last.y) / (mouse.x - last.x)));
@@ -75,12 +66,34 @@ public class Punto extends Thread {
                 degree = 180 + Math.toDegrees(Math.atan((double) (mouse.y - last.y) / (last.x - mouse.x)));
             }
             Point p = new Point((int) 
-                    (last.x + Math.cos(Math.toRadians(degree)) * velocidad), (int) 
-                    (last.y - Math.sin(Math.toRadians(degree)) * velocidad));
+                    (last.x + Math.cos(Math.toRadians(degree)) * speed), (int) 
+                    (last.y - Math.sin(Math.toRadians(degree)) * speed));
             return p;
         }
-    
-    
-    
-    
-}
+
+    public ArrayList<Point> getSerpiente() {
+        return snake;
+    }
+
+    public void setSerpiente(ArrayList<Point> serpiente) {
+        this.snake = serpiente;
+    }
+
+    public ArrayList<Point> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(ArrayList<Point> foods) {
+        this.foods = foods;
+    }
+
+    public PointerInfo getA() {
+        return a;
+    }
+
+    public void setA(PointerInfo a) {
+        this.a = a;
+    }
+        
+    }
+
