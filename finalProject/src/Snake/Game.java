@@ -8,7 +8,6 @@ import java.awt.Point;
 import java.awt.PointerInfo;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 
 public class Game {
@@ -33,7 +32,6 @@ public class Game {
     
     public void finishGame(){
         if(point.snake.size()>10)
-            JOptionPane.showMessageDialog(board, "Fin del juego");
         board.setVisible(false);
     }
 }
