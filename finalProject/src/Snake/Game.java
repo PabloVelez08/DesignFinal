@@ -1,7 +1,7 @@
-package slither;
+package Snake;
 
 
-import slither.Board;
+import Snake.Board;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
